@@ -5,16 +5,16 @@ version: "3.9"
 services:
   auto-gpt:
     depends_on:
-      - redis
+      - pinecone
     build: ./
     env_file:
       - .env
     environment:
-      MEMORY_BACKEND: ${MEMORY_BACKEND:-redis}
-      REDIS_HOST: ${REDIS_HOST:-redis}
+      MEMORY_BACKEND: ${MEMORY_BACKEND:-pinecone}
+      PINECONE_HOST: ${PINECONE_HOST:-pinecone}
     volumes:
       - ./:/app
     profiles: ["exclude-from-up"]
 
   redis:
-    image: "redis/redis-stack-server:latest"
+    image: "pinecone/pinecone-stack-server:latest"
